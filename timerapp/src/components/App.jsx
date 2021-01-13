@@ -50,6 +50,43 @@ class App extends React.Component {
       .deleteTask(timer);
   }
 
+  //<-- SORTING ACCORGING STARTING TIME-->//
+
+  sortingFunction = (timers) => {
+    if (this.state.order === 'ASC') {
+      return timers.sort((a, b) => {
+        if (a.startTime === b.startTime) 
+          return 0;
+        else if (a.startTime === 0) 
+          return -1;
+        else if (b.startTime === 0) 
+          return 1;
+        else if (a.startTime > b.startTime) 
+          return 1;
+        else if (b.startTime > a.startTime) 
+          return -1;
+        else 
+          return 0;
+        }
+      )
+    } else {
+      return timers.sort((a, b) => {
+        if (a.startTime === b.startTime) 
+          return 0;
+        else if (a.startTime === 0) 
+          return -1;
+        else if (b.startTime === 0) 
+          return 1;
+        else if (a.startTime < b.startTime) 
+          return 1;
+        else if (b.startTime < a.startTime) 
+          return -1;
+        else 
+          return 0;
+        }
+      )
+    }
+  }
 
   //<-- INSERTING INTO LIST-->//
   manageTimer = () => {
@@ -83,7 +120,55 @@ class App extends React.Component {
   newDescription = (timer) => {
   }
 
-  
+  //<-- PLAY PAUSE SINGLE TIMER-->//
+  continueTimer = (timer) => {
+    if (!timer.timerState) {
+      let storedTime = timer.time;
+
+      this.setState({
+        timerTime: storedTime,
+        timerStart: Date.now() - storedTime
+      })
+      this.timer = setInterval(() => {
+        this.setState({
+          timerTime: Date.now() - this.state.timerStart
+        });
+      }, 10);
+      this.objectTimer = setInterval(() => {
+
+        const updatedTimer = {
+          ...timer,
+          time: this.state.timerTime,
+          timerState: true
+        }
+
+        this
+          .props
+          .editTask(updatedTimer);
+      }, 10);
+    } else {
+
+      const stoppedTime = this.state.timerTime;
+
+      this.setState({
+        timerTime: 0
+      }, () => {
+
+        const updatedTimer = {
+          ...timer,
+          time: stoppedTime,
+          timerState: false
+        }
+
+        this
+          .props
+          .editTask(updatedTimer);
+      })
+      clearInterval(this.timer);
+      clearInterval(this.objectTimer);
+    }
+  }
+
   render() {
     const {currentDescription, dtimerTime} = this.state;
     const sortedTimers = this.sortingFunction(this.props.tasks);
