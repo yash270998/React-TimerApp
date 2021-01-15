@@ -12,7 +12,3 @@ If you would like to download the code and try it for yourself:
 3. Install packages: `yarn/npm install`
 4. Start project: `yarn/npm start`
 5. Open your browser at: `http://localhost:3000`
-
-## 🐾 Author
-
-[Kajal Singh](https://github.com/kajal1106)
