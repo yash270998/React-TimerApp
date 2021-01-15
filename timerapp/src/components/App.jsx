@@ -119,7 +119,8 @@ class App extends React.Component {
   }
   newDescription = (timer) => {
   }
-  //PLAY PAUSE SINGLE TIMER//
+
+  //<-- PLAY PAUSE SINGLE TIMER-->//
   continueTimer = (timer) => {
     if (!timer.timerState) {
       let storedTime = timer.time;
