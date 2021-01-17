@@ -1,6 +1,5 @@
 ## React Timer App
 
-Mini React App Timer Challenge for [Viralbamboo](https://viralbamboo.com/)
 ## 🚀 Installation
 
 [node.js](http://nodejs.org/download/) is required to get `npm`.
