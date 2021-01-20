@@ -1,6 +1,6 @@
 ## React Timer App
 
-## 🚀 Installation
+>🚀 Installation
 
 [node.js](http://nodejs.org/download/) is required to get `npm`.
 
